@@ -1,0 +1,8 @@
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+generated
+generated_tests
