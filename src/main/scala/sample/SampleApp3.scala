@@ -8,14 +8,15 @@ object SampleApp3 extends App {
   private lazy val dao: EmpDao = EmpDao.impl
 
   Required {
-    dao.create() // create table
+    // create table & insert
+    dao.create()
     val inserted = Seq(
       Emp(ID(-1), "scott", 10, -1),
       Emp(ID(-1), "allen", 20, -1)
     ).map(dao.insert)
     println(inserted)
 
-    // idが2のEmpのageを +1
+    // idが2のEmpのageを +1 にupdate
     val updated = // Optionなので型推論が働く
       dao
         .selectById(ID(2))
