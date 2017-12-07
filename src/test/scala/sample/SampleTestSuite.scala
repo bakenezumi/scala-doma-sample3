@@ -1,11 +1,13 @@
 package sample
 
-import org.scalatest.FunSuite
-import SampleApp3._
 import domala.Required
-import domala.jdbc.Result
+import domala.jdbc.{Config, Result}
+import org.scalatest.FunSuite
 
 class SampleTestSuite extends FunSuite with org.scalatest.BeforeAndAfterAll {
+
+  private implicit lazy val config: Config = AppConfig
+  private lazy val dao: EmpDao = EmpDao.impl
 
   override def beforeAll(): Unit = {
     Required {
@@ -17,7 +19,7 @@ class SampleTestSuite extends FunSuite with org.scalatest.BeforeAndAfterAll {
     Required {
       config.getTransactionManager.setRollbackOnly()
       val Result(_, entity) =
-        dao.insert(Emp(NOT_ASSIGNED_EMP_ID, "foo", 10, -1))
+        dao.insert(Emp(ID(-1), "foo", 10, -1))
       val selected = dao.selectById(entity.id)
       assert(selected contains Emp(ID(1), "foo", 10, 1))
     }

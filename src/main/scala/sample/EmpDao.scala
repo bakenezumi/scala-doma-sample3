@@ -5,17 +5,6 @@ import domala.jdbc.Result
 
 @Dao
 trait EmpDao {
-  @Script("""
-  create table emp(
-      id int not null primary key,
-      name varchar(20),
-      age int,
-      version int not null
-  );
-
-  create sequence emp_id_seq start with 1;
-  """)
-  def create(): Unit
 
   @Select("select * from emp where id = /* id */0")
   def selectById(id: ID[Emp]): Option[Emp] // scala.Optionが使える
@@ -28,4 +17,17 @@ trait EmpDao {
 
   @Update
   def update(emp: Emp): Result[Emp]
+
+  @Script("""
+  create table emp(
+      id int not null primary key,
+      name varchar(20),
+      age int,
+      version int not null
+  );
+
+  create sequence emp_id_seq start with 1;
+  """)
+  def create(): Unit
+
 }
