@@ -11,7 +11,7 @@ lazy val root = (project in file(".")).settings(
     "com.h2database" % "h2" % "1.4.193",
     scalaTest % Test
   ),
-  // for Doma annotation processor
+  // for Domala annotation
   metaMacroSettings,
 )
 
